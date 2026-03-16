@@ -1,13 +1,6 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from "react"; 
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  width: 100%;
-  max-width: 500px;
-`;
+ 
 
 interface AddTodoProps {
     handleAddTodo: (newTodo: string) => void;
@@ -21,7 +14,12 @@ export const AddTodo = ({handleAddTodo}: AddTodoProps) => {
      */
 
 
-    const handleAdd = () => {
+    const handleAdd = () => { 
+        if(value.trim().length < 1) { 
+            return;
+        }
+
+
         handleAddTodo(value);
         // another for 2 way binding
         // reset state

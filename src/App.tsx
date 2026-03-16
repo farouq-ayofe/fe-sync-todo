@@ -1,19 +1,31 @@
 
 import * as React from 'react';
+import {ThemeProvider} from "styled-components"
 import './App.css';
 import {AddTodo} from "./AddTodo";
+import { TodoItem, type ITodoItem } from './TodoItem';
+import type { Theme } from './styled'; 
 
- 
-/**
- * Declare Todo Item Type
- *  
- */
+ const THEME: Theme = {
+  colors: {
+    primary: "#aa3bff",
+    primary_light: "rgba(170, 59, 255, 0.5)",
+    secondary: "#6b6375",
+    border_color: "#e5e4e7"
+  }
+ }
 
-interface TodoItem {
-  id: string;  // unique id
-  value: string; // todo
-}
 
+ /**
+  * Styled component
+  * Questions
+  * Persisted storage
+  * __
+  * Custom hook 
+  * Providers
+  * __
+  * API Integration and database
+  */
 
 
 
@@ -31,7 +43,7 @@ function App() {
       return [
         ...prevState,
         {
-          id: Date.now().toString(),
+          id: Date.now().toString(),  
           value: newTodo,
         }
       ]
@@ -39,22 +51,56 @@ function App() {
     })
 }
 
+
+const handleDeleteTodo = (id: string) => {
+  setTodoList((prevState) => { 
+      return prevState.filter((el) => el.id !== id)
+  })
+}
+
+const handleUpdateTodoValue = ({id, value}: ITodoItem) => {
+
+  setTodoList(prevState => {
+  
+
+
+    return prevState.map(el => {
+      if(el.id === id) {
+        return {
+          ...el,
+          value
+        }
+      }
+
+
+
+      return el;
+    });
+  })
+
+}
+
   return (
-    <>
+    <ThemeProvider theme={THEME}>
+    <div className="app-container">
       <section id="center">
          <AddTodo handleAddTodo={handleAddTodo} />
       </section>
 
       <ul className="ticks">
-        {todoList.map((todo) => (
-          <li key={todo.id}>{todo.value}</li>
-        ))}
+        {todoList.map((todo) => {
+            return  (
+              <TodoItem  key={todo.id} todo={todo} deleteTodoItemFn={handleDeleteTodo} handleUpdateTodoValue={handleUpdateTodoValue} />
+           
+            )
+        })}
       </ul>
   
 
       <div className="ticks"></div>
       <section id="spacer"></section>
-    </>
+    </div>
+    </ThemeProvider>
   )
 }
 
