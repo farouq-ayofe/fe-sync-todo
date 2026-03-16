@@ -1,4 +1,13 @@
 import * as React from "react";
+import styled from "styled-components";
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+`;
 
 interface AddTodoProps {
     handleAddTodo: (newTodo: string) => void;

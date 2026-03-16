@@ -18,7 +18,7 @@ interface TodoItem {
 
 
 function App() { 
-  const [todoList, setTodoList] = React.useState<Array<TodoItem>>([{
+  const [todoList, setTodoList] = React.useState([{
     id: "1",
     value: "Complete chores",
   }, {
