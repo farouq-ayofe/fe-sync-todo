@@ -5,6 +5,7 @@ type ConfigProperty = string | number | boolean | {
 }
 
 export interface Theme extends Record<string, ConfigProperty> {
+  is_dark_theme: boolean;
   colors: {
     primary: string;
     primary_light: string;

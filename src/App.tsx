@@ -6,13 +6,21 @@ import {AddTodo} from "./AddTodo";
 import { TodoItem, type ITodoItem } from './TodoItem';
 import type { Theme } from './styled'; 
 
+// import { Button, TextInput } from "./atoms";
+//  import { Button } from "./atoms/Button";
+//  import { TextInput } from "./atoms/TextInput";
+
+
  const THEME: Theme = {
+  is_dark_theme: false,
+  
   colors: {
     primary: "#aa3bff",
     primary_light: "rgba(170, 59, 255, 0.5)",
     secondary: "#6b6375",
     border_color: "#e5e4e7"
-  }
+  },
+  
  }
 
 
