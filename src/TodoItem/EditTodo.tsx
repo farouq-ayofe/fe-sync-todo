@@ -20,6 +20,11 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
 const handleSave  = () => {
+
+    const lastUpdateTime = localStorage.getItem("last-update-time");
+    console.log("🚀 ~ handleSave ~ lastUpdateTime:", lastUpdateTime)
+
+
     if(value.trim().length < 1) { 
         return;
     }

@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { EditTodo, type EditTodoProps } from "./EditTodo";
 import { StyledTodoItem, EditButton, DeleteButton, StyledButtons } from "./TodoItem.styled"
-import type {ITodoItem} from "./types";
+import type {ITodoItem} from "./types"; 
 
 
 
@@ -14,6 +14,16 @@ interface TodoItemProps extends Pick<EditTodoProps, "handleUpdateTodoValue"> {
 
 export const TodoItem = ({ todo, deleteTodoItemFn, handleUpdateTodoValue }: TodoItemProps) => {
     const [isEditing, setIsEditing] = React.useState(false);
+
+
+    // const [charCount, setCharCount] =  React.useState(0);
+
+    // React.useEffect(() => { 
+    //     setCharCount(charCount+ 1);
+    //  console.log(`TodoItem charCount, ${charCount}`);
+    // });
+
+
 
 
     const handleDelete = () => {
@@ -31,7 +41,22 @@ export const TodoItem = ({ todo, deleteTodoItemFn, handleUpdateTodoValue }: Todo
         setIsEditing(false);
     }
 
+// before, dep update, on mount & re mount
 
+    // onComponentMount
+    // React.useEffect(() => {
+    //     console.log(`TodoItem mounted, ${todo.value}`);
+ 
+
+    //     // unmount - cleanup
+    //     return () => {
+    //         console.log(`TodoItem unmounted, ${todo.value}`);
+    //     }
+    // },[]);
+
+
+ 
+ 
 
     return (
         <StyledTodoItem>

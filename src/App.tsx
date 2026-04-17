@@ -25,9 +25,10 @@ import type { Theme } from './styled';
 
 
  /**
-  * Styled component
+  * Styled component ⚠️
+  * 
   * Questions
-  * Persisted storage
+  * Persisted storage 
   * __
   * Custom hook 
   * Providers
@@ -36,33 +37,72 @@ import type { Theme } from './styled';
   */
 
 
+ // useEffect
 
-function App() { 
-  const [todoList, setTodoList] = React.useState([{
-    id: "1",
-    value: "Complete chores",
-  }, {
-    id: "2",
-    value: "Buy groceries",
-  }]);
+ // useSyncExternalStore
+
+const STORAGE_KEY = "todos";
+
+
+ const initializeTodos = () => {
+  const todo = localStorage.getItem(STORAGE_KEY);
+
+
+  if(todo) {
+    return JSON.parse(todo);
+  }
+
+  return [
+    ];
+
+
+ }
+
+
+
+
+export function App() { 
+  const [todoList, setTodoList] = React.useState<ITodoItem[]>(initializeTodos());
+
+
+  
+
+
+  // React.useEffect(() => {
+  //   localStorage.setItem(STORAGE_KEY, JSON.stringify(todoList));
+  // }, 
+  // [todoList]);
+
+  /**
+   * - retrieve todos from local storage
+   * - set todos to local storage
+   * - update todos in local storage
+   * - delete todos from local storage
+   */
 
   const handleAddTodo = (newTodo: string) => {
     setTodoList((prevState) => {
-      return [
+      const updatedTodo =  [
         ...prevState,
         {
           id: Date.now().toString(),  
           value: newTodo,
         }
       ]
+ 
 
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedTodo));
+      return updatedTodo;
     })
 }
 
 
 const handleDeleteTodo = (id: string) => {
   setTodoList((prevState) => { 
-      return prevState.filter((el) => el.id !== id)
+    const updatedTodo = prevState.filter((el) => el.id !== id)
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedTodo));
+    return updatedTodo;
   })
 }
 
@@ -72,7 +112,7 @@ const handleUpdateTodoValue = ({id, value}: ITodoItem) => {
   
 
 
-    return prevState.map(el => {
+    const updatedTodo = prevState.map(el => {
       if(el.id === id) {
         return {
           ...el,
@@ -80,10 +120,12 @@ const handleUpdateTodoValue = ({id, value}: ITodoItem) => {
         }
       }
 
-
-
       return el;
     });
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedTodo));
+    
+    return updatedTodo;
   })
 
 }
@@ -99,7 +141,6 @@ const handleUpdateTodoValue = ({id, value}: ITodoItem) => {
         {todoList.map((todo) => {
             return  (
               <TodoItem  key={todo.id} todo={todo} deleteTodoItemFn={handleDeleteTodo} handleUpdateTodoValue={handleUpdateTodoValue} />
-           
             )
         })}
       </ul>

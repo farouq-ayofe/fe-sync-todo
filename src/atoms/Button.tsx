@@ -44,9 +44,7 @@ const BaseButton = styled.button`
     border: none;
     cursor: pointer; 
     animation: ${pulseKeyframes} 1s infinite;
-    
-    
-    `;
+`;
 
 export const StartButton = styled.button`
     background-color: green;
