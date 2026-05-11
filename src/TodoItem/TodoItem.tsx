@@ -2,19 +2,21 @@
 import * as React from 'react'
 import { EditTodo, type EditTodoProps } from "./EditTodo";
 import { StyledTodoItem, EditButton, DeleteButton, StyledButtons } from "./TodoItem.styled"
-import type {ITodoItem} from "./types"; 
+import type {ITodoItem} from "./types";  
+import { useTodoContext } from "../context";
 
 
-
-interface TodoItemProps extends Pick<EditTodoProps, "handleUpdateTodoValue"> {
+interface TodoItemProps {
     todo: ITodoItem;
-
-    deleteTodoItemFn: (id: string) => void;
+ 
 }
 
-export const TodoItem = ({ todo, deleteTodoItemFn, handleUpdateTodoValue }: TodoItemProps) => {
+export const TodoItem = ({ todo   }: TodoItemProps) => {
     const [isEditing, setIsEditing] = React.useState(false);
-
+    const {
+        handleDeleteTodo: deleteTodoItemFn,
+        handleUpdateTodoValue,
+    } = useTodoContext();  
 
     // const [charCount, setCharCount] =  React.useState(0);
 

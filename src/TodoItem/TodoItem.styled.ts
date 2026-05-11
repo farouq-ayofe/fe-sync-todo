@@ -60,4 +60,5 @@ gap: 4px;
 export const StyledInput =  styled.input`
     width: 240px;
     padding: 4px;
-`
+`;
+ 
